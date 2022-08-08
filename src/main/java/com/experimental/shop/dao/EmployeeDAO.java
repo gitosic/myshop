@@ -2,7 +2,6 @@ package com.experimental.shop.dao;
 
 
 import com.experimental.shop.entity.Employee;
-import org.hibernate.SessionFactory;
 
 import java.util.List;
 
