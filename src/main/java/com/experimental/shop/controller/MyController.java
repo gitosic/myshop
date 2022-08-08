@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,14 +30,27 @@ public class MyController {
 //        return "view_for_all_employees";
     }
 
-    @GetMapping("/shop_window")
+    @RequestMapping("/shop_window")
     public String getInfoOnlyForSeller(){
         return "view_for_seller";
     }
 
-    @GetMapping("/manager_info")
+    @RequestMapping("/manager_info")
     public String getInfoOnlyForManagers(){
         return "view_for_managers";
+    }
+
+    @RequestMapping("/addNewEmployee")
+    public String addNewEmployee(Model model){
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
+        return "employee-info";
+    }
+
+    @RequestMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute("employee") Employee employee){
+        employeeService.saveEmployee(employee);
+        return "redirect:/";
     }
 
     @RequestMapping("/updateInfo")
